@@ -92,6 +92,18 @@ namespace Math
 	}
 
 	template <typename Type>
+	inline Type Pow(Type num)
+	{
+		return std::pow(num, 2);
+	}
+
+	template <typename Type>
+	inline Type Pow(Type num, float power)
+	{
+		return std::pow(num, power);
+	}
+
+	template <typename Type>
 	inline int Round(Type num)
 	{
 		return (int)std::round(num);
@@ -119,18 +131,6 @@ namespace Math
 	inline Type Trunc(Type num)
 	{
 		return std::trunc(num);
-	}
-
-	template <typename Type>
-	inline Type Pow(Type num)
-	{
-		return std::pow(num, 2);
-	}
-
-	template <typename Type>
-	inline Type Pow(Type num, float power)
-	{
-		return std::pow(num, power);
 	}
 
 	template <typename Type>

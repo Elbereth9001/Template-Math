@@ -41,7 +41,7 @@ namespace Math
 		{
 			static inline bool Equals(const Type1* v1, const Type2* v2)
 			{
-				return *v1 == *v2 && ArrayOperator<Index - 1, Type1, Type2>::Equals(v1 + 1, v2 + 1);
+				return *v1 == *v2;
 			}
 
 			static inline void Set(Type1* v1, const Type2* v2)
