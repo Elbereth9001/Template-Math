@@ -196,7 +196,7 @@ namespace Math
 			Vector() : VectorBase() {}
 			Vector(const Type(&data)[size]) : VectorBase() { Operator::ArrayOperator<size, Type>::Set(Data(), data); }
 
-			Vector(const Vector::VectorData data) : VectorBase(data) {}
+			Vector(const VectorData data) : VectorBase(data) {}
 			Vector(const Vector& vector) : VectorBase(vector.vectorData) {}
 
 			#if AOHATAN_MATH_VECTOR11
