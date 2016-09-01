@@ -106,12 +106,14 @@ namespace Math
 	template <typename Type>
 	inline int Round(Type num)
 	{
+		// TODO: Alternative to round
 		return (int)std::round(num);
 	}
 
 	template <typename Type>
 	inline Type Round(Type num, float decimals)
 	{
+		// TODO: Alternative to roundf
 		return std::roundf(num * Pow(10, decimals)) / Pow(10, decimals);
 	}
 
@@ -130,6 +132,7 @@ namespace Math
 	template <typename Type>
 	inline Type Trunc(Type num)
 	{
+		// TODO: Alternative to trunc
 		return std::trunc(num);
 	}
 
@@ -148,12 +151,14 @@ namespace Math
 	template <typename Type>
 	inline Type Min(Type num1, Type num2)
 	{
+		// TODO: Alternative to fmin
 		return std::fmin(num1, num2);
 	}
 
 	template <typename Type>
 	inline Type Max(Type num1, Type num2)
 	{
+		// TODO: Alternative to fmax
 		return std::fmax(num1, num2);
 	}
 }

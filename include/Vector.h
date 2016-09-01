@@ -84,7 +84,7 @@ namespace Math
 
 			inline static Vector Zero()
 			{
-				return VectorBase({ 0 });
+				return VectorBase();
 			}
 
 
@@ -193,10 +193,10 @@ namespace Math
 			}
 
 			// Constructors
-			Vector() : Vector(VectorData{ 0 }) {}
+			Vector() : VectorBase() {}
+			Vector(const Type(&data)[size]) : VectorBase() { Operator::ArrayOperator<size, Type>::Set(Data(), data); }
 
-			Vector(const VectorData data) : VectorBase(data) {}
-			Vector(const Type(&data)[size]) : VectorBase({ 0 }) { Operator::ArrayOperator<size, Type>::Set(Data(), data); }
+			Vector(const Vector::VectorData data) : VectorBase(data) {}
 			Vector(const Vector& vector) : VectorBase(vector.vectorData) {}
 
 			#if AOHATAN_MATH_VECTOR11
@@ -219,9 +219,9 @@ namespace Math
 			typedef const typename Operator::EnableIf<3 == VectorSize, Type>::type& Vector3Type;
 			typedef const typename Operator::EnableIf<4 == VectorSize, Type>::type& Vector4Type;
 
-			Vector(Vector2Type x, Vector2Type y) : Vector(VectorData{ x, y }) {}
-			Vector(Vector3Type x, Vector3Type y, Vector3Type z) : Vector(VectorData{ x, y, z }) {}
-			Vector(Vector4Type x, Vector4Type y, Vector4Type z, Vector4Type w) : Vector(VectorData{ x, y, z, w }) {}
+			Vector(Vector2Type x, Vector2Type y) : VectorBase(Vector::VectorData{ x, y }) {}
+			Vector(Vector3Type x, Vector3Type y, Vector3Type z) : VectorBase(Vector::VectorData{ x, y, z }) {}
+			Vector(Vector4Type x, Vector4Type y, Vector4Type z, Vector4Type w) : VectorBase(Vector::VectorData{ x, y, z, w }) {}
 
 			#endif /* AOHATAN_MATH_VECTOR11 */
 
@@ -253,7 +253,8 @@ namespace Math
 			inline operator Vector<S, T, B>()
 			{
 				Vector<S, T, B> vector;
-				vector.Set<size, Type, VectorBase>(*this);
+				//vector.Set<size, Type, VectorBase>(*this);
+				Operator::ArrayOperator< Operator::Size<size, Vector<S, T, B>::size>::Result, Type, T>::Set(vector.Data(), Data());
 
 				return vector;
 			}
@@ -382,12 +383,14 @@ namespace Math
 		}
 
 		// Vector Bases
+		// TODO: Component initialization?
 
 		template <unsigned char VectorSize, typename Type>
 		struct VectorBase
 		{
 			VectorData<VectorSize, Type> vectorData;
 
+			VectorBase() {}
 			VectorBase(VectorData<VectorSize, Type> data) : vectorData(data) {}
 		};
 
@@ -405,6 +408,7 @@ namespace Math
 				};
 			};
 
+			Vector3Base() {}
 			Vector3Base(VectorData<3, Type> data) : vectorData(data) {}
 
 			static void Cross(Vector<3, Type, Vector3Base >& vector, const Vector<3, Type, Vector3Base >& rhs)
@@ -443,6 +447,7 @@ namespace Math
 				};
 			};
 
+			Vector2Base() {}
 			Vector2Base(VectorData<2, Type> data) : vectorData(data) {}
 
 		};
@@ -459,6 +464,7 @@ namespace Math
 				};
 			};
 
+			Vector4Base() {}
 			Vector4Base(VectorData<4, Type> data) : vectorData(data) {}
 
 		};

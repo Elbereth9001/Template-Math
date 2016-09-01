@@ -37,7 +37,7 @@ namespace Math
 	namespace Operator
 	{
 		template <typename Type1, typename Type2>
-		struct ArrayOperator<1, Type1, Type2, Template::Vector4Base<Type1>>
+		struct ArrayOperator<1, Type1, Type2, Template::Vector4Base<Type1> >
 		{
 			static inline bool Equals(const Type1* v1, const Type2* v2)
 			{
